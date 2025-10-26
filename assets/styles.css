@@ -1,0 +1,26 @@
+:root{--ink:#0f172a;--muted:#334155;--bg:#f8fafc;--brand:#2f855a;--brand-2:#556b2f;--card:#fff;--shadow:0 8px 30px rgba(0,0,0,.07);--radius:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial}
+a{color:var(--brand);text-decoration:none}
+.container{max-width:1140px;margin:0 auto;padding:24px}
+header{display:flex;align-items:center;gap:18px;padding:16px 0}
+nav a{margin-right:16px;color:var(--muted)}
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);min-height:420px;display:grid;place-items:center;margin:12px 0 28px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35));}
+.hero .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.hero .inner{position:relative;text-align:center;color:#fff;padding:32px;max-width:900px}
+h1{font-size:40px;line-height:1.2;margin:0 0 12px}
+h2{font-size:28px;margin:24px 0 8px}
+.lead{font-size:18px;color:#e6f2ea;margin:0 0 18px}
+.btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 18px;border-radius:999px;box-shadow:var(--shadow)}
+.btn.secondary{background:transparent;border:2px solid #fff}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:18px 0}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.card img{width:100%;height:180px;object-fit:cover}
+.card .pad{padding:16px}
+.badge{display:inline-block;background:rgba(47,133,90,.12);color:#21523d;border:1px solid rgba(47,133,90,.28);padding:4px 8px;border-radius:999px;font-size:12px}
+footer{color:var(--muted);padding:24px 0 48px}
+html[dir="rtl"] body{font-family:"Segoe UI", Tahoma, "Noto Naskh Arabic UI","Noto Kufi Arabic", system-ui}
+html[dir="rtl"] .hero .inner{text-align:center}
+html[dir="rtl"] nav a{margin-left:16px;margin-right:0}
+small{color:#64748b}
