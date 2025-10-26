@@ -8,7 +8,7 @@
   --radius:16px;
 
   /* hero tuning knobs */
-  --hero-min-h:500px;              /* taller hero to show more city */
+  --hero-min-h:600px;              /* taller hero to show more city */
   --hero-pos:center 40%;           /* move crop DOWN (show more Old City) */
   --hero-filter:brightness(.78) contrast(1.08) saturate(1.02);
   --hero-overlay-1:linear-gradient(180deg,
