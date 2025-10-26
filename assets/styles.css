@@ -19,7 +19,7 @@
   --hero-overlay-2:radial-gradient(110% 70% at 50% 52%,
                     rgba(0,0,0,.30) 0%,
                     rgba(0,0,0,0) 62%);
-  --hero-lift:-8%;                  /* move text block UP so it clears the Dome */
+  --hero-lift:-30%;                  /* move text block UP so it clears the Dome */
 }
 
 *{box-sizing:border-box}
