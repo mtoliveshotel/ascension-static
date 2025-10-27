@@ -187,3 +187,41 @@ html[dir="rtl"] .site-nav{
   justify-content:flex-start;      /* language bar flush toward the left edge of the container */
 }
 
+
+
+
+
+
+
+
+
+
+
+/* ==== Keep header aligned with page container (LTR & RTL) ==== */
+:root{
+  /* tweak to match your site’s container; these values are safe defaults */
+  --page-max: 1160px;      /* max content width */
+  --page-pad: 24px;        /* left/right gutters */
+}
+
+/* Make the header use the same centered width + gutters as the page */
+header{
+  width: min(var(--page-max), 100% - (var(--page-pad) * 2));
+  margin-inline: auto;              /* center the header block */
+  padding-inline: var(--page-pad);  /* keep logo/nav off the edges */
+}
+
+/* (optional) keep logo size tasteful and constant */
+header .logo{
+  display:block;
+  width:auto;
+  height:auto;
+  max-height:56px;                  /* adjust if you want a taller logo */
+}
+
+/* We already have:
+   header { display:flex; justify-content:space-between; gap:16px; }
+   html[dir="rtl"] header { flex-direction:row-reverse; }
+   …so the language bar stays opposite the logo in RTL. */
+
+
