@@ -41,27 +41,32 @@ header{
   position:relative;overflow:visible;
 }
 
+/* Logo is visually larger but doesn’t change layout height */
 .logo{
   display:block;height:36px;width:auto;
-  transform:scale(1.8);            /* visually larger logo without reflow */
+  transform:scale(1.8);
   transform-origin:left center;
 }
 html[dir="rtl"] .logo{ transform-origin:right center; }
 
-/* Language strip — always on the far edge; spacing works in LTR & RTL */
+/* Language strip: pushed to far edge; consistent spacing & color */
 .site-nav{
-  margin-inline-start:auto;          /* pushes the nav to the opposite edge */
-  display:flex; gap:16px;
+  margin-inline-start:auto;              /* right in LTR, left in RTL */
+  display:flex;gap:16px;align-items:center;
 }
 .site-nav a{ color:var(--muted); }
 
-/* Reserve room so the scaled logo (on the right in RTL) can’t overlap nav */
-html[dir="rtl"] .site-nav{
-  margin-inline-end: 120px;          /* tweak 96–140px to taste */
+/* Buffer in RTL so scaled logo (on the right) can’t overlap the nav */
+html[dir="rtl"] .site-nav{ margin-inline-end:120px; }
+
+/* Fallback: if a page forgot the .site-nav class, keep it usable */
+header>nav:not(.site-nav){
+  margin-inline-start:auto;display:flex;gap:16px;align-items:center;
 }
+header>nav:not(.site-nav) a{ color:var(--muted); }
 
 /* ===========================
-   HERO — darker, reframed, readable
+   HERO
    =========================== */
 .hero{
   position:relative;min-height:var(--hero-min-h);
@@ -85,22 +90,28 @@ html[dir="rtl"] .site-nav{
 }
 .hero h1,.hero .lead{ text-shadow:0 4px 18px rgba(0,0,0,.72) }
 
-/* Typography */
+/* ===========================
+   Typography
+   =========================== */
 h1{font-size:40px;line-height:1.2;margin:0 0 12px}
 h2{font-size:28px;margin:24px 0 8px}
 .lead{font-size:18px;color:#e6f2ea;margin:0 0 18px}
 
-/* Buttons */
+/* ===========================
+   Buttons
+   =========================== */
 .btn{
   display:inline-block;background:var(--brand);color:#fff;
   padding:12px 18px;border-radius:999px;box-shadow:var(--shadow)
 }
 .btn.secondary{background:transparent;border:2px solid #fff}
 
-/* auto-flips in RTL */
+/* Direction-aware spacing between buttons */
 .btn + .btn{ margin-inline-start:8px; }
 
-/* Cards */
+/* ===========================
+   Cards & grids
+   =========================== */
 .grid{
   display:grid;gap:16px;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -118,15 +129,21 @@ h2{font-size:28px;margin:24px 0 8px}
   font-size:12px
 }
 
-/* Footer */
+/* ===========================
+   Footer
+   =========================== */
 footer{color:var(--muted);padding:24px 0 48px}
 
-/* RTL font defaults */
+/* ===========================
+   RTL font defaults
+   =========================== */
 html[dir="rtl"] body{
   font-family:"Segoe UI", Tahoma, "Noto Naskh Arabic UI", "Noto Kufi Arabic", system-ui;
 }
 
-/* Responsive */
+/* ===========================
+   Responsive tweaks
+   =========================== */
 @media (max-width:640px){
   :root{ --hero-min-h:520px; --hero-pos:center 36%; --hero-lift:-6%; }
   .hero .inner::before{ inset:-8px -12px }
