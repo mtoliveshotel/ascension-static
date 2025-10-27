@@ -112,3 +112,78 @@ html[dir="rtl"] body{
   .logo{ transform:scale(1.15) }   /* slightly smaller on phones */
   .hero .inner::before{ inset:-8px -12px }
 }
+
+
+
+
+
+
+
+
+
+
+/* ===== Header & Language Bar — LTR/RTL mirroring ===== */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  /* prevent inherited center text from affecting header items */
+  text-align: initial;
+}
+
+/* Logo sizing stays constant; header height does not grow */
+header .logo{
+  height:auto;
+  max-height:56px;     /* adjust if you want the logo a bit larger/smaller */
+  width:auto;
+  display:block;
+}
+
+/* Language bar */
+.site-nav{
+  /* kill legacy layout that caused the squeeze */
+  float:none !important;
+  position:static !important;
+
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;            /* spacing between EN | PY | TR | … */
+  margin:0;
+  padding:0;
+}
+
+/* Links look the same in EN/AR/HE */
+:root{
+  --nav-color:#2F6B52; /* brand green – change if you like */
+}
+.site-nav a{
+  color:var(--nav-color);
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.02em;    /* restores “spread” that disappeared */
+  opacity:.95;
+}
+.site-nav a:hover{ opacity:1; }
+
+/* Optional thin separator between items (keeps RTL-safe margins) */
+/*
+.site-nav a + a{
+  position:relative;
+}
+.site-nav a + a::before{
+  content:"|";
+  opacity:.35;
+  margin-inline:8px;
+}
+*/
+
+/* -------- RTL mirroring (no markup changes required) -------- */
+html[dir="rtl"] header{            /* logo ↔ nav swap */
+  flex-direction:row-reverse;
+}
+html[dir="rtl"] .site-nav{
+  justify-content:flex-start;      /* language bar flush toward the left edge of the container */
+}
+
