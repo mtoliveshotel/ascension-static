@@ -36,18 +36,25 @@ a{color:var(--brand);text-decoration:none}
    =========================== */
 .container{max-width:1140px;margin:0 auto;padding:24px}
 
+/* ===== Header (mirrored LTR/RTL, flush to container) ===== */
 header{
-  display:flex;align-items:center;gap:18px;padding:16px 0;
-  position:relative;overflow:visible;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:16px 0;
+  position:relative;
 }
 
 /* Logo is visually larger but doesn’t change layout height */
 .logo{
-  display:block;height:36px;width:auto;
+  display:block;
+   height:36px;
+   width:auto;
   transform:scale(1.8);
   transform-origin:left center;
 }
 html[dir="rtl"] .logo{ transform-origin:right center; }
+
 
 /* Language strip: pushed to far edge; consistent spacing & color */
 .site-nav{
@@ -61,13 +68,25 @@ html[dir="rtl"] .logo{ transform-origin:right center; }
 .site-nav a{ color:var(--muted); }
 
 /* Buffer in RTL so scaled logo (on the right) can’t overlap the nav */
-html[dir="rtl"] .site-nav{ margin-inline-end:120px; }
+html[dir="rtl"] .site-nav{ margin-inline-end:0; }
+
+
+
 
 /* Fallback: if a page forgot the .site-nav class, keep it usable */
 header>nav:not(.site-nav){
   margin-inline-start:auto;display:flex;gap:16px;align-items:center;
 }
 header>nav:not(.site-nav) a{ color:var(--muted); }
+
+
+
+
+
+
+
+
+
 
 /* ===========================
    HERO
