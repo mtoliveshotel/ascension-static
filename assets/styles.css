@@ -7,9 +7,9 @@
   --card:#fff; --shadow:0 8px 30px rgba(0,0,0,.07);
   --radius:16px;
 
-  /* hero tuning knobs */
-  --hero-min-h:600px;              /* taller hero to show more city */
-  --hero-pos:center 40%;           /* move crop DOWN (show more Old City) */
+  /* hero tuning */
+  --hero-min-h:600px;
+  --hero-pos:center 40%;
   --hero-filter:brightness(.78) contrast(1.08) saturate(1.02);
   --hero-overlay-1:linear-gradient(180deg,
                     rgba(0,0,0,.60) 0%,
@@ -19,7 +19,7 @@
   --hero-overlay-2:radial-gradient(110% 70% at 50% 52%,
                     rgba(0,0,0,.30) 0%,
                     rgba(0,0,0,0) 62%);
-  --hero-lift:-70%;                  /* move text block UP so it clears the Dome */
+  --hero-lift:-8%;
 }
 
 *{box-sizing:border-box}
@@ -32,55 +32,52 @@ body{
 a{color:var(--brand);text-decoration:none}
 
 /* ===========================
-   Layout
+   Layout / Header
    =========================== */
 .container{max-width:1140px;margin:0 auto;padding:24px}
-header{display:flex;align-items:center;gap:18px;padding:16px 0}
-nav a{margin-right:16px;color:var(--muted)}
+
+header{
+  display:flex;align-items:center;gap:18px;padding:16px 0;
+  position:relative;overflow:visible;
+}
+
+.logo{
+  display:block;height:36px;width:auto;
+  transform:scale(1.8);            /* visually larger logo without reflow */
+  transform-origin:left center;
+}
+html[dir="rtl"] .logo{ transform-origin:right center; }
+
+/* Language strip — always on the far edge; spacing works in LTR & RTL */
+.site-nav{
+  margin-inline-start:auto;          /* pushes the nav to the opposite edge */
+  display:flex; gap:16px;
+}
+.site-nav a{ color:var(--muted); }
 
 /* ===========================
    HERO — darker, reframed, readable
    =========================== */
 .hero{
-  position:relative;
-  min-height:var(--hero-min-h);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  display:grid;place-items:center;
-  margin:12px 0 28px;
+  position:relative;min-height:var(--hero-min-h);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  display:grid;place-items:center;margin:12px 0 28px;
 }
-
-/* background image lives inline via style="", this layer applies the tuning */
 .hero .bg{
-  position:absolute;inset:0;
-  background-size:cover;
-  background-position:var(--hero-pos);
-  filter:var(--hero-filter);
+  position:absolute;inset:0;background-size:cover;
+  background-position:var(--hero-pos);filter:var(--hero-filter);
 }
-
-/* dual overlay: overall darken + center emphasis for text */
-.hero::before{
-  content:"";position:absolute;inset:0;
-  background:var(--hero-overlay-1), var(--hero-overlay-2);
+.hero::before{content:"";position:absolute;inset:0;
+  background:var(--hero-overlay-1),var(--hero-overlay-2);
 }
-
 .hero .inner{
   position:relative;text-align:center;color:#fff;
-  padding:32px;max-width:900px;
-  transform:translateY(var(--hero-lift));   /* lift text off the Dome */
+  padding:32px;max-width:900px;transform:translateY(var(--hero-lift));
 }
-
-/* localized scrim directly behind the text/buttons */
 .hero .inner::before{
-  content:"";position:absolute;inset:-10px -16px;
-  background:rgba(0,0,0,.28);
-  backdrop-filter:blur(2px);
-  border-radius:14px;
-  z-index:-1;
+  content:"";position:absolute;inset:-10px -16px;background:rgba(0,0,0,.28);
+  backdrop-filter:blur(2px);border-radius:14px;z-index:-1;
 }
-
-/* stronger halo for legibility */
 .hero h1,.hero .lead{ text-shadow:0 4px 18px rgba(0,0,0,.72) }
 
 /* ===========================
@@ -98,6 +95,9 @@ h2{font-size:28px;margin:24px 0 8px}
   padding:12px 18px;border-radius:999px;box-shadow:var(--shadow)
 }
 .btn.secondary{background:transparent;border:2px solid #fff}
+
+/* space between adjacent buttons (direction-aware) */
+.btn + .btn{ margin-inline-start:8px; }
 
 /* ===========================
    Cards & grids
@@ -125,74 +125,16 @@ h2{font-size:28px;margin:24px 0 8px}
 footer{color:var(--muted);padding:24px 0 48px}
 
 /* ===========================
-   RTL support
+   RTL font defaults
    =========================== */
 html[dir="rtl"] body{
   font-family:"Segoe UI", Tahoma, "Noto Naskh Arabic UI", "Noto Kufi Arabic", system-ui;
 }
-html[dir="rtl"] .hero .inner{text-align:center}
-html[dir="rtl"] nav a{margin-left:16px;margin-right:0}
-
-/* ===========================
-   Utilities
-   =========================== */
-small{color:#64748b}
 
 /* ===========================
    Responsive tweaks
    =========================== */
 @media (max-width:640px){
-  :root{
-    --hero-min-h:520px;
-    --hero-pos:center 36%;
-    --hero-lift:-6%;
-  }
+  :root{ --hero-min-h:520px; --hero-pos:center 36%; --hero-lift:-6%; }
   .hero .inner::before{ inset:-8px -12px }
 }
-
-
-
-
-
-
-/* Push nav to the far edge in both LTR and RTL */
-.site-nav { margin-inline-start: auto; }
-
-/* Space between links using logical property (auto-flips in RTL) */
-nav a { margin-inline-end: 16px; color: var(--muted); }
-
-
-
-
-
-
-
-
-
-
-/* Make the logo look bigger without changing header height */
-header { position: relative; overflow: visible; }
-
-.logo{
-  display: block;
-  height: 36px;             /* keep the original layout box height */
-  width: auto;
-  transform: scale(1.95);   /* increase visual size */
-  transform-origin: left center;
-  /* optional nudge if you want it a touch higher/lower without reflow */
-  /* translateY(-2px); */
-}
-
-@media (max-width: 640px){
-  .logo{ transform: scale(1.15); }  /* a bit smaller on phones */
-}
-
-
-
-/* The logo is on the right in RTL, so scale from the right edge */
-html[dir="rtl"] .logo {
-  transform-origin: right center;
-}
-
-
-
