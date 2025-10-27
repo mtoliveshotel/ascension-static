@@ -160,7 +160,7 @@ header { position: relative; overflow: visible; }
   display: block;
   height: 36px;             /* keep the original layout box height */
   width: auto;
-  transform: scale(1.35);   /* increase visual size */
+  transform: scale(1.5);   /* increase visual size */
   transform-origin: left center;
   /* optional nudge if you want it a touch higher/lower without reflow */
   /* translateY(-2px); */
