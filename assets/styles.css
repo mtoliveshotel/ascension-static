@@ -51,8 +51,12 @@ html[dir="rtl"] .logo{ transform-origin:right center; }
 
 /* Language strip: pushed to far edge; consistent spacing & color */
 .site-nav{
-  margin-inline-start:auto;              /* right in LTR, left in RTL */
-  display:flex;gap:16px;align-items:center;
+   margin-inline-start:auto;              /* right in LTR, left in RTL */
+   display:flex;
+   gap:16px;
+   align-items:center;
+   padding:0;
+   margin:0;
 }
 .site-nav a{ color:var(--muted); }
 
