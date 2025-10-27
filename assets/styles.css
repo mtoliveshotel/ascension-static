@@ -55,6 +55,11 @@ html[dir="rtl"] .logo{ transform-origin:right center; }
 }
 .site-nav a{ color:var(--muted); }
 
+/* Reserve room so the scaled logo (on the right in RTL) can’t overlap nav */
+html[dir="rtl"] .site-nav{
+  margin-inline-end: 120px;          /* tweak 96–140px to taste */
+}
+
 /* ===========================
    HERO — darker, reframed, readable
    =========================== */
@@ -80,28 +85,22 @@ html[dir="rtl"] .logo{ transform-origin:right center; }
 }
 .hero h1,.hero .lead{ text-shadow:0 4px 18px rgba(0,0,0,.72) }
 
-/* ===========================
-   Typography
-   =========================== */
+/* Typography */
 h1{font-size:40px;line-height:1.2;margin:0 0 12px}
 h2{font-size:28px;margin:24px 0 8px}
 .lead{font-size:18px;color:#e6f2ea;margin:0 0 18px}
 
-/* ===========================
-   Buttons
-   =========================== */
+/* Buttons */
 .btn{
   display:inline-block;background:var(--brand);color:#fff;
   padding:12px 18px;border-radius:999px;box-shadow:var(--shadow)
 }
 .btn.secondary{background:transparent;border:2px solid #fff}
 
-/* space between adjacent buttons (direction-aware) */
+/* auto-flips in RTL */
 .btn + .btn{ margin-inline-start:8px; }
 
-/* ===========================
-   Cards & grids
-   =========================== */
+/* Cards */
 .grid{
   display:grid;gap:16px;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -119,21 +118,15 @@ h2{font-size:28px;margin:24px 0 8px}
   font-size:12px
 }
 
-/* ===========================
-   Footer
-   =========================== */
+/* Footer */
 footer{color:var(--muted);padding:24px 0 48px}
 
-/* ===========================
-   RTL font defaults
-   =========================== */
+/* RTL font defaults */
 html[dir="rtl"] body{
   font-family:"Segoe UI", Tahoma, "Noto Naskh Arabic UI", "Noto Kufi Arabic", system-ui;
 }
 
-/* ===========================
-   Responsive tweaks
-   =========================== */
+/* Responsive */
 @media (max-width:640px){
   :root{ --hero-min-h:520px; --hero-pos:center 36%; --hero-lift:-6%; }
   .hero .inner::before{ inset:-8px -12px }
