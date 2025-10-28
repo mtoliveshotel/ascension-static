@@ -23,7 +23,7 @@
   --hero-overlay-2:radial-gradient(110% 70% at 50% 52%,
                     rgba(0,0,0,.30) 0%,
                     rgba(0,0,0,0) 62%);
-  --hero-lift:-60%;
+  --hero-lift:-65%;
 }
 
 *{box-sizing:border-box}
