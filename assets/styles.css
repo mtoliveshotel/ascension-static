@@ -194,16 +194,6 @@ html[dir="rtl"] body{
 
 
 
-
-
-
-
-
-
-
-
-
-
 /* --- RTL header: logo right, language bar left (mirror of LTR) --- */
 html[dir="rtl"] header{
   /* Use normal row flow but force its inline direction to LTR so
@@ -278,3 +268,20 @@ header img.logo{
 
 .footer p { text-align:center; opacity:.85; font-size:14px; }
 .footer p bdi { direction:ltr; unicode-bidi:isolate; } /* extra safety; bdi isolates by default */
+
+
+.contact-line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .5ch;
+}
+
+.contact-line .sep {
+  opacity: .6;
+  margin: 0 .5ch;
+}
+
+bdi[dir="ltr"] {
+  direction: ltr;
+  unicode-bidi: isolate; /* keeps the number/email behaving like LTR islands */
+}
