@@ -193,3 +193,31 @@ html[dir="rtl"] header .logo    { order: 2; }                  /* ends up flush 
 html[dir="rtl"] header .logo img{
   transform-origin: right center;   /* grow from the right in RTL */
 }
+
+
+
+
+
+
+
+
+
+/* === Legacy-compatible logo scaling (Chrome 109, etc.) === */
+header img.logo{
+  /* base intrinsic size */
+  width: 160px;
+  height: auto;
+  max-height: none;
+
+  /* use transform instead of the unsupported `scale:` property */
+  transform: scale(var(--logo-scale, 1));
+  -webkit-transform: scale(var(--logo-scale, 1));
+  transform-origin: left center;
+  -webkit-transform-origin: left center;
+}
+
+/* mirror the anchor for RTL so enlarging looks natural */
+[dir="rtl"] header img.logo{
+  transform-origin: right center;
+  -webkit-transform-origin: right center;
+}
