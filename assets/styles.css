@@ -9,7 +9,7 @@
 
    /* --- Fixed header height + independent logo scaling --- */
   --header-h: 76px;       /* visual height of the header bar */
-  --logo-scale: 1.00;     /* bump this up (e.g., 1.10, 1.20) to enlarge logo */
+  --logo-scale: 1.50;     /* bump this up (e.g., 1.10, 1.20) to enlarge logo */
    
    /* hero tuning */
   --hero-min-h:600px;
