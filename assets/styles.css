@@ -271,5 +271,10 @@ header img.logo{
 
 
 
+/* LTR island for email/phones inside RTL pages */
+.ltr { direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
+.sep { opacity: .6; margin: 0 .5rem; }
+
+
 .footer p { text-align:center; opacity:.85; font-size:14px; }
 .footer p bdi { direction:ltr; unicode-bidi:isolate; } /* extra safety; bdi isolates by default */
