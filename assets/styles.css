@@ -268,3 +268,8 @@ header img.logo{
   word-break: break-word;
   overflow-wrap: anywhere;
 }
+
+
+
+.footer p { text-align:center; opacity:.85; font-size:14px; }
+.footer p bdi { direction:ltr; unicode-bidi:isolate; } /* extra safety; bdi isolates by default */
