@@ -32,28 +32,57 @@ body{
 a{color:var(--brand);text-decoration:none}
 
 /* ===========================
-   Layout / Header
+   Page container
    =========================== */
 .container{max-width:1140px;margin:0 auto;padding:24px}
 
+/* ===========================
+   Header & Language Bar — mirroring LTR/RTL
+   =========================== */
+/* Single, authoritative header block (removes earlier conflicting rules) */
 header{
-  display:flex; align-items:center; gap:18px; padding:16px 0; position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;    /* pushes logo and nav to opposite edges */
+  gap:16px;
+  padding:16px 0;
+  text-align:initial;               /* prevent inherited center text */
 }
 
-/* Make the logo look bigger without changing header height */
-.logo{ display:block; height:36px; width:auto; transform:scale(1.8); transform-origin:left center; }
-html[dir="rtl"] .logo{ transform-origin:right center; }
+/* Logo sizing: same in all languages, sits flush to container edge */
+header .logo{
+  display:block;
+  width:auto;
+  height:auto;
+  max-height:56px;                  /* adjust if you want larger/smaller */
+}
 
-/* Language strip (mirrors automatically LTR/RTL) */
+/* Language bar: identical spacing & color in LTR and RTL */
 .site-nav{
-  margin-inline-start:auto;              /* pushes nav to far edge: right in LTR, left in RTL */
-  display:flex; gap:16px; align-items:center;
-}
-.site-nav a{ color:var(--muted); }
+  /* kill legacy layout that caused “scrunched under logo” */
+  float:none !important;
+  position:static !important;
 
-/* Fallback if someone forgets class="site-nav" */
-header>nav:not(.site-nav){ margin-inline-start:auto; display:flex; gap:16px; align-items:center; }
-header>nav:not(.site-nav) a{ color:var(--muted); }
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;                         /* EN · PY · TR · … spacing */
+  margin:0;
+  padding:0;
+}
+.site-nav a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.02em;
+  opacity:.95;
+}
+.site-nav a:hover{ opacity:1; }
+
+/* Flip the order only; spacing/edges remain identical */
+html[dir="rtl"] header{
+  flex-direction:row-reverse;       /* logo right, nav left */
+}
 
 /* ===========================
    HERO
@@ -109,119 +138,6 @@ html[dir="rtl"] body{
    =========================== */
 @media (max-width:640px){
   :root{ --hero-min-h:520px; --hero-pos:center 36%; --hero-lift:-6%; }
-  .logo{ transform:scale(1.15) }   /* slightly smaller on phones */
+  header .logo{ max-height:48px; }
   .hero .inner::before{ inset:-8px -12px }
 }
-
-
-
-
-
-
-
-
-
-
-/* ===== Header & Language Bar — LTR/RTL mirroring ===== */
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  /* prevent inherited center text from affecting header items */
-  text-align: initial;
-}
-
-/* Logo sizing stays constant; header height does not grow */
-header .logo{
-  height:auto;
-  max-height:56px;     /* adjust if you want the logo a bit larger/smaller */
-  width:auto;
-  display:block;
-}
-
-/* Language bar */
-.site-nav{
-  /* kill legacy layout that caused the squeeze */
-  float:none !important;
-  position:static !important;
-
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:14px;            /* spacing between EN | PY | TR | … */
-  margin:0;
-  padding:0;
-}
-
-/* Links look the same in EN/AR/HE */
-:root{
-  --nav-color:#2F6B52; /* brand green – change if you like */
-}
-.site-nav a{
-  color:var(--nav-color);
-  text-decoration:none;
-  font-weight:600;
-  letter-spacing:.02em;    /* restores “spread” that disappeared */
-  opacity:.95;
-}
-.site-nav a:hover{ opacity:1; }
-
-/* Optional thin separator between items (keeps RTL-safe margins) */
-/*
-.site-nav a + a{
-  position:relative;
-}
-.site-nav a + a::before{
-  content:"|";
-  opacity:.35;
-  margin-inline:8px;
-}
-*/
-
-/* -------- RTL mirroring (no markup changes required) -------- */
-html[dir="rtl"] header{            /* logo ↔ nav swap */
-  flex-direction:row-reverse;
-}
-html[dir="rtl"] .site-nav{
-  justify-content:flex-start;      /* language bar flush toward the left edge of the container */
-}
-
-
-
-
-
-
-
-
-
-
-
-/* ==== Keep header aligned with page container (LTR & RTL) ==== */
-:root{
-  /* tweak to match your site’s container; these values are safe defaults */
-  --page-max: 1160px;      /* max content width */
-  --page-pad: 24px;        /* left/right gutters */
-}
-
-/* Make the header use the same centered width + gutters as the page */
-header{
-  width: min(var(--page-max), 100% - (var(--page-pad) * 2));
-  margin-inline: auto;              /* center the header block */
-  padding-inline: var(--page-pad);  /* keep logo/nav off the edges */
-}
-
-/* (optional) keep logo size tasteful and constant */
-header .logo{
-  display:block;
-  width:auto;
-  height:auto;
-  max-height:56px;                  /* adjust if you want a taller logo */
-}
-
-/* We already have:
-   header { display:flex; justify-content:space-between; gap:16px; }
-   html[dir="rtl"] header { flex-direction:row-reverse; }
-   …so the language bar stays opposite the logo in RTL. */
-
-
