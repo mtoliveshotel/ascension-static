@@ -141,3 +141,30 @@ html[dir="rtl"] body{
   header .logo{ max-height:48px; }
   .hero .inner::before{ inset:-8px -12px }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- RTL header: logo right, language bar left (mirror of LTR) --- */
+html[dir="rtl"] header{
+  /* Use normal row flow but force its inline direction to LTR so
+     "start" is left and "end" is right for placement math */
+  flex-direction: row !important;
+  direction: ltr;
+  justify-content: space-between;    /* keep extremes identical to LTR */
+}
+
+/* Put the language bar first (left), logo second (right) */
+html[dir="rtl"] header .site-nav{ order: 1; direction: ltr; } /* EN · PY · TR · … read left→right */
+html[dir="rtl"] header .logo    { order: 2; }                  /* ends up flush right */
